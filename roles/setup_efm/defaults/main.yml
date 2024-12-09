@@ -81,8 +81,8 @@ efm_node_file: "/etc/edb/efm-{{ efm_version }}/{{ efm_cluster_name }}.nodes"
 efm_bin_path: "/usr/edb/efm-{{ efm_version }}/bin"
 
 efm_packages_redhat:
-  - java-1.8.0-openjdk
-  - mailx
+  - java-11-openjdk
+  - s-nail
   - edb-efm{{ efm_install_version }}
 
 efm_packages_debian:
@@ -142,6 +142,10 @@ supported_pg_version:
   - 15
 
 supported_efm_version:
+  - "4.10"
+  - "4.9"
+  - "4.8"
+  - "4.7"
   - "4.6"
   - "4.5"
   - "4.4"
