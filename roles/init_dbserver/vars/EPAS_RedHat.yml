@@ -5,7 +5,7 @@ pg_default_data: "/var/lib/edb/as{{ pg_version }}/{{ pg_instance_name }}/data"
 pg_encoding: ""
 
 # log directory and filename
-pg_log: "/var/log/edb"
+pg_log: "/var/log/edb/as{{ pg_version }}/{{ pg_instance_name }}"
 pg_log_filename: "{{ pg_instance_name }}-edb-%a.log"
 
 # postgres service
