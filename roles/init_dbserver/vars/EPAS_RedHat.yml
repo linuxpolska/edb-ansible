@@ -41,5 +41,5 @@ pg_shared_libraries_list:
   - "$libdir/dbms_aq"
   - "$libdir/edb_wait_states"
   - "$libdir/sql-profiler"
-  - "$libdir/index_advisor"
+  - "$libdir/{{ 'query_advisor' if pg_version > 15 else 'index_advisor'}}"
   - "$libdir/pg_stat_statements"
