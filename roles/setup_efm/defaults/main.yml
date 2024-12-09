@@ -120,6 +120,7 @@ supported_os:
   - CentOS8
   - RedHat7
   - RedHat8
+  - RedHat9
   - Ubuntu20
   - Ubuntu22
   - Debian9
