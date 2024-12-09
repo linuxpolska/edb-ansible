@@ -141,6 +141,7 @@ supported_pg_version:
   - 13
   - 14
   - 15
+  - 16
 
 supported_efm_version:
   - "4.10"

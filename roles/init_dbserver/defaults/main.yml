@@ -129,3 +129,4 @@ supported_pg_version:
   - 13
   - 14
   - 15
+  - 16

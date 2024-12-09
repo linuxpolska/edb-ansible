@@ -36,7 +36,7 @@
   when:
     - pg_version|int <= 14
 
-- name: Ensure privileges for the barman user when pg_version == 15
+- name: Ensure privileges for the barman user when pg_version >= 15
   ansible.builtin.include_role:
     name: manage_dbserver
     tasks_from: manage_privileges
@@ -57,4 +57,4 @@
         user: "{{ barman_pg_user }}"
         db: postgres
   when:
-    - pg_version|int == 15
+    - pg_version|int >= 15
