@@ -30,9 +30,10 @@
     group: "{{ pcp_passfile_group }}"
     mode: "{{ pcp_passfile_mode }}"
     lines:
-      - line: "*:*:{{ pcp_admin_user }}:{{ pcp_admin_user_password }}"
+      - line: "{{ item }}:{{ pgpool2_pcp_port }}:{{ pcp_admin_user }}:{{ pcp_admin_user_password }}"
     create: true
   become: true
+  loop: "{{ groups['pgpool2'] | map('extract', hostvars, 'ansible_host') | list + ([pgpool2_vip] if pgpool2_vip | length > 0 else []) }}"
 
 - name: Prepare pgpool2_nodes when not use_hostname
   ansible.builtin.set_fact:

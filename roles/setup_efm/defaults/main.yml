@@ -84,6 +84,7 @@ efm_packages_redhat:
   - java-11-openjdk
   - s-nail
   - edb-efm{{ efm_install_version }}
+  - jq
 
 efm_packages_debian:
   - bsd-mailx

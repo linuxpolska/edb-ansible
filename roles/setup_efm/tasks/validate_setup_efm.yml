@@ -25,11 +25,11 @@
     success_msg: "EFM user was created correctly."
   run_once: true
 
-# validate efm service
+# validate efm service, include witness without DB
 - name: Run command to check efm cluster status
   ansible.builtin.shell: |
     set -o pipefail
-    {{ efm_bin_path }}/efm cluster-status {{ efm_cluster_name }} | grep UP
+    {{ efm_bin_path }}/efm cluster-status-json {{ efm_cluster_name }} | jq .nodes| egrep -o 'Primary|Standby|Witness'
   args:
     executable: /bin/bash
   become: true
@@ -58,9 +58,7 @@
       - ansible_facts.packages[item] is defined
     fail_msg: "Package {{ item }} has not been installed."
     success_msg: "Package {{ item }} has been installed."
-  loop:
-    - java-1.8.0-openjdk
-    - mailx
+  loop: "{{ efm_packages_redhat }}"
   when: ansible_os_family == 'RedHat'
 
 - name: Check that all required packages have been installed on Debian
