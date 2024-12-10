@@ -42,7 +42,7 @@
   when: use_replication_slots
   vars:
     pg_query:
-      - query: "Select * from pg_replication_slots"
+      - query: "Select * from pg_replication_slots where slot_name in ({{ (groups['primary'] + groups['standby']) | unique | replace('[', '') | replace(']', '') | replace('-', '_') }})"
         db: "{{ pg_database }}"
 
 - name: Set repslots_query_result with sql_query_output
@@ -70,7 +70,7 @@
       run_once: true
   vars:
     pg_query:
-      - query: "Select application_name from pg_stat_replication"
+      - query: "Select application_name from pg_stat_replication where application_name in ({{ (groups['primary'] + groups['standby']) | unique | replace('[', '') | replace(']', '') }})"
         db: "{{ pg_database }}"
 
 - name: Set pg_stat_query_result with sql_query_output
@@ -147,7 +147,7 @@
 - name: Check if replication was successful on standby(s)
   ansible.builtin.assert:
     that:
-      - rep_slots_query_result.results[0].query_result[0]['slot_name'] == inventory_hostname
+      - rep_slots_query_result.results[0].query_result[0]['slot_name'] == inventory_hostname | replace('-', '_')
     fail_msg: "Replication was not successful on standby(s)"
     success_msg: "Replication was successful on standby(s)"
   when: use_replication_slots
