@@ -70,6 +70,217 @@
           'value': '{{ pgpool2_sr_check_password }}',
           'state': 'present',
           'quoted': true
+        },
+        {
+          'key': 'failover_on_backend_error',
+          'value': 'off',
+          'state': 'present',
+          'quoted': false
+        },
+        {
+          'key': 'search_primary_node_timeout',
+          'value': 5,
+          'state': 'present',
+          'quoted': false
+        },
+        {
+          'key': 'wd_priority',
+          'value': '{{ wd_priority }}',
+          'state': 'present',
+          'quoted': false
+        },
+        {
+          'key': 'log_directory',
+          'value': '/var/log/edb/pgpool{{ pgpool2_version }}/',
+          'state': 'present',
+          'quoted': true
+        }
+      ]
+
+# TODO: create a loop for it
+- name: Build pgpoolII SR hosts configuration
+  ansible.builtin.set_fact:
+    pgpool2_sr_configuration_hosts: >-
+      [
+        {
+          'key': 'hostname0',
+          'value': '{{ groups['pgpool2'][0] | default('') }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 0 else 'absent' }}',
+          'quoted': true
+        },
+        {
+          'key': 'pgpool_port0',
+          'value': '{{ pgpool2_port }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 0 else 'absent' }}',
+          'quoted': false
+        },
+        {
+          'key': 'wd_port0',
+          'value': '{{ pgpool2_wd_port }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 0 else 'absent' }}',
+          'quoted': false
+        },
+        {
+          'key': 'heartbeat_hostname0',
+          'value': '{{ groups['pgpool2'][0] | default('') }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 0 else 'absent' }}',
+          'quoted': true
+        },
+        {
+          'key': 'heartbeat_port0',
+          'value': '{{ pgpool2_wd_heartbeat_port }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 0 else 'absent' }}',
+          'quoted': false
+        },
+        {
+          'key': 'hostname1',
+          'value': '{{ groups['pgpool2'][1] | default('') }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 1 else 'absent' }}',
+          'quoted': true
+        },
+        {
+          'key': 'pgpool_port1',
+          'value': '{{ pgpool2_port }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 1 else 'absent' }}',
+          'quoted': false
+        },
+        {
+          'key': 'wd_port1',
+          'value': '{{ pgpool2_wd_port }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 1 else 'absent' }}',
+          'quoted': false
+        },
+        {
+          'key': 'heartbeat_hostname1',
+          'value': '{{ groups['pgpool2'][1] | default('') }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 0 else 'absent' }}',
+          'quoted': true
+        },
+        {
+          'key': 'heartbeat_port1',
+          'value': '{{ pgpool2_wd_heartbeat_port }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 1 else 'absent' }}',
+          'quoted': false
+        },
+        {
+          'key': 'hostname2',
+          'value': '{{ groups['pgpool2'][2] | default('') }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 2 else 'absent' }}',
+          'quoted': true
+        },
+        {
+          'key': 'pgpool_port2',
+          'value': '{{ pgpool2_port }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 2 else 'absent' }}',
+          'quoted': false
+        },
+        {
+          'key': 'wd_port2',
+          'value': '{{ pgpool2_wd_port }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 2 else 'absent' }}',
+          'quoted': false
+        },
+        {
+          'key': 'heartbeat_hostname2',
+          'value': '{{ groups['pgpool2'][2] | default('') }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 2 else 'absent' }}',
+          'quoted': true
+        },
+        {
+          'key': 'heartbeat_port2',
+          'value': '{{ pgpool2_wd_heartbeat_port }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 2 else 'absent' }}',
+          'quoted': false
+        },
+        {
+          'key': 'hostname3',
+          'value': '{{ groups['pgpool2'][3] | default('') }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 3 else 'absent' }}',
+          'quoted': true
+        },
+        {
+          'key': 'pgpool_port3',
+          'value': '{{ pgpool2_port }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 3 else 'absent' }}',
+          'quoted': false
+        },
+        {
+          'key': 'wd_port3',
+          'value': '{{ pgpool2_wd_port }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 3 else 'absent' }}',
+          'quoted': false
+        },
+        {
+          'key': 'heartbeat_hostname3',
+          'value': '{{ groups['pgpool2'][3] | default('') }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 3 else 'absent' }}',
+          'quoted': true
+        },
+        {
+          'key': 'heartbeat_port3',
+          'value': '{{ pgpool2_wd_heartbeat_port }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 3 else 'absent' }}',
+          'quoted': false
+        },
+        {
+          'key': 'hostname4',
+          'value': '{{ groups['pgpool2'][4] | default('') }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 4 else 'absent' }}',
+          'quoted': true
+        },
+        {
+          'key': 'pgpool_port4',
+          'value': '{{ pgpool2_port }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 4 else 'absent' }}',
+          'quoted': false
+        },
+        {
+          'key': 'wd_port4',
+          'value': '{{ pgpool2_wd_port }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 4 else 'absent' }}',
+          'quoted': false
+        },
+        {
+          'key': 'heartbeat_hostname4',
+          'value': '{{ groups['pgpool2'][4] | default('') }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 4 else 'absent' }}',
+          'quoted': true
+        },
+        {
+          'key': 'heartbeat_port4',
+          'value': '{{ pgpool2_wd_heartbeat_port }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 4 else 'absent' }}',
+          'quoted': false
+        },
+        {
+          'key': 'hostname5',
+          'value': '{{ groups['pgpool2'][5] | default('') }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 5 else 'absent' }}',
+          'quoted': true
+        },
+        {
+          'key': 'pgpool_port5',
+          'value': '{{ pgpool2_port }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 5 else 'absent' }}',
+          'quoted': false
+        },
+        {
+          'key': 'wd_port5',
+          'value': '{{ pgpool2_wd_port }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 5 else 'absent' }}',
+          'quoted': false
+        },
+        {
+          'key': 'heartbeat_hostname5',
+          'value': '{{ groups['pgpool2'][5] | default('') }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 5 else 'absent' }}',
+          'quoted': true
+        },
+        {
+          'key': 'heartbeat_port5',
+          'value': '{{ pgpool2_wd_heartbeat_port }}',
+          'state': '{{ 'present' if groups['pgpool2'] | length > 5 else 'absent' }}',
+          'quoted': false
         }
       ]
 
@@ -80,3 +291,10 @@
     tasks_from: pgpool2_manage_configuration
   vars:
     pgpool2_configuration_lines: "{{ pgpool2_sr_configuration }}"
+
+- name: Include pgpool2_manage_configuration
+  ansible.builtin.include_role:
+    name: manage_pgpool2
+    tasks_from: pgpool2_manage_configuration
+  vars:
+    pgpool2_configuration_lines: "{{ pgpool2_sr_configuration_hosts }}"
