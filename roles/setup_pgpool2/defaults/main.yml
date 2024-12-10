@@ -56,6 +56,7 @@ pgpool2_backend_flag: "ALLOW_TO_FAILOVER"
 validate_only: false
 use_validation: true
 remove_only: false
+create_test_user: false
 
 supported_os:
   - CentOS7

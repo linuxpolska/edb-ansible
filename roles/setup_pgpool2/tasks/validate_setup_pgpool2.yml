@@ -102,12 +102,16 @@
     input_password: "{{ pgpool2_test_user_password }}"
   no_log: "{{ disable_logging }}"
   run_once: true
-  when: pgpool2_test_user_password|length < 1
+  when: 
+    - pgpool2_test_user_password|length < 1
+    - create_test_user
 
 - name: Set pgpool2_test_user_password
   ansible.builtin.set_fact:
     pgpool2_test_user_password: "{{ input_password }}"
-  when: pgpool2_test_user_password|length < 1
+  when:
+    - pgpool2_test_user_password|length < 1
+    - create_test_user
   run_once: true
 
 - name: Add pgpool2_test_user
@@ -122,7 +126,9 @@
         pass: "{{ pgpool2_test_user_password }}"
         pg_database: "{{ pg_pgpool_database }}"
   no_log: "{{ disable_logging }}"
-  when: pgpool2_test_user_password|length > 1
+  when:
+    - pgpool2_test_user_password|length > 1
+    - create_test_user
   run_once: true
 
 - name: Add pgpool2_test_user
@@ -135,7 +141,9 @@
         pass: "{{ pgpool2_test_user_password }}"
         auth: scram
   no_log: "{{ disable_logging }}"
-  when: pgpool2_test_user_password|length > 1
+  when:
+    - pgpool2_test_user_password|length > 1
+    - create_test_user
 
 - name: Run query to check if load_balance_mode is on
   ansible.builtin.include_role:
@@ -149,8 +157,8 @@
         db: "{{ pg_pgpool_database }}"
         host: '127.0.0.1'
         port: "{{ pgpool2_port }}"
-        login_user: "{{ pgpool2_test_user }}"
-        login_password: "{{ pgpool2_test_user_password }}"
+        login_user: "{{ pgpool2_test_user if create_test_user else pg_pgpool_user }}"
+        login_password: "{{ pgpool2_test_user_password if create_test_user else pg_pgpool_user_password }}"
         login_socket: ""
   when: pgpool2_load_balancing
 
@@ -181,7 +189,9 @@
         pg_database: "{{ pg_pgpool_database }}"
         state: absent
   no_log: "{{ disable_logging }}"
-  when: pgpool2_test_user_password|length > 1
+  when:
+    - pgpool2_test_user_password|length > 1
+    - create_test_user
   run_once: true
 
 - name: Remove pgpool2_test_user from pgpool2
@@ -194,7 +204,9 @@
         pass: "{{ pgpool2_test_user_password }}"
         state: 'absent'
   no_log: "{{ disable_logging }}"
-  when: pgpool2_test_user_password|length > 1
+  when:
+    - pgpool2_test_user_password|length > 1
+    - create_test_user
 
 - name: Reload pgpool2 service after changing pool_passwd file
   ansible.builtin.include_tasks: pgpool2_restart_service.yml
