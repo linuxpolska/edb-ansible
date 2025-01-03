@@ -26,3 +26,4 @@ pg_service: "{{ lookup('edb_devops.edb_postgres.pg_service') }}"
 # pgpool2 binary dir
 pgpool2_bin_path: "/usr/bin"
 pgpool2_package_name: "pgpool-II"
+pgpool2_pcp_package_name: "pgpool-II-pcp"
