@@ -21,8 +21,10 @@ input_password: ""
 pcp_admin_user: "pcpadmin"
 pcp_admin_user_password: ""
 
-# Disable logging
+# Logging
 disable_logging: false
+pgpool2_logging_collector: "on"
+pgpool2_log_filename: "pgpool-%Y-%m-%d_%H%M%S.log"
 
 pgpool2_vip: ""
 pgpool2_vip_dev: ""

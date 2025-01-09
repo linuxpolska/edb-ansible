@@ -252,17 +252,17 @@ syslog_ident = 'pgpool'
                                         #   panic
 
 # This is used when logging to stderr:
-#logging_collector = off
+logging_collector = {{ pgpool2_logging_collector }}
                                         # Enable capturing of stderr
                                         # into log files.
                                         # (change requires restart)
 
 # -- Only used if logging_collector is on ---
 
-#log_directory = '/tmp/pgpool_logs'
+log_directory = '{{ pgpool2_logdir }}'
                                         # directory where log files are written,
                                         # can be absolute
-#log_filename = 'pgpool-%Y-%m-%d_%H%M%S.log'
+log_filename = '{{ pgpool2_log_filename }}'
                                         # log file name pattern,
                                         # can include strftime() escapes
 
