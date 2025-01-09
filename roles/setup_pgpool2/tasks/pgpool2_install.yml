@@ -50,8 +50,8 @@
 - name: Install client packages on RedHat
   ansible.builtin.package:
     name:
-      - postgresql16
-      - postgresql16-libs
+      - postgresql{{ pg_version }}
+      - postgresql{{ pg_version }}-libs
     state: present
   when:
     - ansible_os_family == 'RedHat'
