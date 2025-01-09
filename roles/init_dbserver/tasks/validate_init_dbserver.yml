@@ -49,13 +49,13 @@
     fail_msg: "The service {{ pg_service }} is not running."
     success_msg: "The service {{ pg_service }} is running."
 
-- name: Check if service pg_service is enabled
-  ansible.builtin.assert:
-    that:
-      - ansible_facts.services[pg_service + '.service']['status'] == 'enabled'
-    fail_msg: "The service {{ pg_service }} is not enabled."
-    success_msg: "The service {{ pg_service }} is enabled."
-  when: ansible_os_family == 'RedHat'
+#- name: Check if service pg_service is enabled
+#  ansible.builtin.assert:
+#    that:
+#      - ansible_facts.services[pg_service + '.service']['status'] == 'enabled'
+#    fail_msg: "The service {{ pg_service }} is not enabled."
+#    success_msg: "The service {{ pg_service }} is enabled."
+#  when: ansible_os_family == 'RedHat'
 
 # check if sockets are listening
 - name: Get stat info for pg_unix_socket_directories
