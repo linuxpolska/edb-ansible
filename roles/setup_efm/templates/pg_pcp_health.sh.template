@@ -5,6 +5,7 @@ export PCP_USER="{{ pcp_admin_user }}"
 export PCP_PORT="{{ pgpool2_pcp_port }}"
 export PGPORT="{{ pg_port }}"
 export PGDATABASE="{{ pg_database }}"
+export PCP_USER_PORT="{{ pgpool2_port }}"
 
 declare -a POOLERS=(
 {% for item in pgpool2_nodes %}
@@ -26,7 +27,7 @@ fi
 for POOLER in "${POOLERS[@]}"
 do
   # check if pgpool is running and accordingly attach
-  $pcp_control is_running ${POOLER} ${PCP_PORT}
+  $pcp_control is_running ${POOLER} ${PCP_USER_PORT}
   if [ $? -eq 0 ]; then
     export PCP_HOST=${POOLER}
     echo "Attaching node ${NODE_ADDRESS} on ${PCP_HOST}"
