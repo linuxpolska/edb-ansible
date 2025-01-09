@@ -16,7 +16,7 @@
 
 - name: Get EPEL repos on RedHat
   ansible.builtin.set_fact:
-    epel_repo_list: "{{ yum_repos.results | selectattr('repoid', 'search', 'pgdg') \
+    epel_repo_list: "{{ yum_repos.results | selectattr('repoid', 'search', 'epel') \
                        | selectattr('state', 'equalto', 'enabled') | map(attribute='repoid') | list }}"
   when:
     - ansible_os_family == 'RedHat'
