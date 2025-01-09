@@ -88,12 +88,6 @@
           'value': '{{ wd_priority }}',
           'state': 'present',
           'quoted': false
-        },
-        {
-          'key': 'log_directory',
-          'value': '/var/log/edb/pgpool{{ pgpool2_version }}/',
-          'state': 'present',
-          'quoted': true
         }
       ]
 
