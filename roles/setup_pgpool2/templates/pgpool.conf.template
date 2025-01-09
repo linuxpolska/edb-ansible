@@ -259,7 +259,8 @@ logging_collector = {{ pgpool2_logging_collector }}
 
 # -- Only used if logging_collector is on ---
 
-log_directory = '{{ pgpool2_logdir }}'
+#log_directory = '{{ pgpool2_logdir }}'
+log_directory = '/var/log/pgpool-II'
                                         # directory where log files are written,
                                         # can be absolute
 log_filename = '{{ pgpool2_log_filename }}'
