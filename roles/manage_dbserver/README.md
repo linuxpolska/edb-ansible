@@ -135,6 +135,7 @@ pg_query:
 ```yaml
 pg_pgpass_values:
     - host: "127.0.0.1"
+      port: 5432
       database: edb
       user: enterprisedb
       password: <password>
