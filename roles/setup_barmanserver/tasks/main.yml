@@ -1,11 +1,4 @@
 ---
 # Entry point of the setup_barmanserver role
-
-# temporary fix
-- name: Set use_hostname var if not defined
-  ansible.builtin.set_fact:
-    use_hostname: true
-  when: use_hostname is not defined
-
 - name: Include the setup_barmanserver.yml
   ansible.builtin.include_tasks: setup_barmanserver.yml
